@@ -17,12 +17,13 @@ on:
         options:
         - 
         - latest
-        - beta
-        - next
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./ED8vJVb3FR
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -33,7 +34,6 @@ jobs:
       - run: yarn lint
       - run: yarn build
       - run: yarn publish --tag ${{ github.event.inputs.npmPublishTag }} --no-git-tag-version
-        working-directory: ./ED8vJVb3FR
         if: github.event.inputs.npmPublishTag == 'latest'
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
