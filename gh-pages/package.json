@@ -11,7 +11,7 @@
 	"devDependencies": {
 		"copyfiles": "2.4.1",
 		"gh-pages": "5.0.0",
-		"ed8vjvb3fr": "0.0.1",
+		"ed8vjvb3fr": "0.0.2",
 		"rimraf": "5.0.0"
 	}
 }
