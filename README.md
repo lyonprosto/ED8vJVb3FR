@@ -1,3 +1,3 @@
 # ED8vJVb3FR
 
-- [here](myLib/README.md)
+Are you new? Check out our [guides](guides/readme.md)
