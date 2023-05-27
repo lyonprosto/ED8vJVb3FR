@@ -1,0 +1,39 @@
+name: ED8vJVb3FR
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - ED8vJVb3FR/**
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - ED8vJVb3FR/**
+  workflow_dispatch:
+    inputs:
+      npmPublishTag:
+        type: choice
+        description: 'npm publish tag'
+        required: false
+        options:
+        - 
+        - latest
+        - beta
+        - next
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+          registry-url: 'https://registry.npmjs.org'
+      - run: yarn
+      - run: yarn lint
+      - run: yarn build
+      - run: yarn publish --tag ${{ github.event.inputs.npmPublishTag }} --no-git-tag-version
+        working-directory: ./ED8vJVb3FR
+        if: github.event.inputs.npmPublishTag == 'latest'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
